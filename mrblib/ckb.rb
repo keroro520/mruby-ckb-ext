@@ -12,13 +12,16 @@ module CKB
     [hex].pack("H*")
   end
 
+  def self.require(binary_hash)
+    eval_by_hash(binary_hash, Source::DEP)
+  end
+
   def self.eval_by_index(index, source)
     self.eval(index, source)
   end
 
   def self.eval_by_hash(binary_hash, source)
     hash = hex_to_bin(binary_hash)
-    transaction = CKB.load_tx
     cells =
       case source
       when Source::INPUT
